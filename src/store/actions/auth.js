@@ -10,14 +10,17 @@ export function setCurrentUser(user) {
 
 export function authUser(type, userData) {
   return dispatch => {
+    // wrap thunk in a promise to wait for API call
     return new Promise((resolve, reject) => {
-      return apiCall("post", `/api/auth/${type}`, userData).then(
-        ({ token, ...user }) => {
+      return apiCall("post", `/api/auth/${type}`, userData)
+        .then(({ token, ...user }) => {
           localStorage.setItem("jwtToken", token);
           dispatch(setCurrentUser(user));
-          resolve();
-        }
-      );
+          resolve(); // indicate API call succeeded
+        })
+        .catch(err => {
+          reject(); //indicate API call failed
+        });
     });
   };
 }
