@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { logout } from "../store/actions/auth";
 import Logo from "../images/textlyte-logo.png";
 
 class Navbar extends Component {
+  logout = event => {
+    event.preventDefault();
+    this.props.logout();
+  };
   render() {
     return (
       <nav className="navbar navbar-expand">
@@ -13,14 +18,29 @@ class Navbar extends Component {
               <img src={Logo} alt="TextLyte Home" />
             </Link>
           </div>
-          <ul className="nav navbar-nav navbar-right">
-            <li>
-              <Link to="/signup">Sign up</Link>
-            </li>
-            <li>
-              <Link to="/signin">Log in</Link>
-            </li>
-          </ul>
+          {this.props.currentUser.isAuthenticated ? (
+            <ul className="nav-navbar-nav navbar-right">
+              <li>
+                <Link
+                  to={`/users/${this.props.currentUser.user.id}/messages/new`}
+                >
+                  New Message
+                </Link>
+              </li>
+              <li>
+                <Link onClick={this.logout}>Log out</Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="nav navbar-nav navbar-right">
+              <li>
+                <Link to="/signup">Sign up</Link>
+              </li>
+              <li>
+                <Link to="/signin">Log in</Link>
+              </li>
+            </ul>
+          )}
         </div>
       </nav>
     );
@@ -35,5 +55,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  null
+  { logout }
 )(Navbar);
