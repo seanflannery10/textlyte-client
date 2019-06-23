@@ -7,11 +7,15 @@ import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 
 const Main = props => {
-  const { authUser, errors, removeError } = props;
+  const { authUser, errors, removeError, currentUser } = props;
   return (
     <div className="container">
       <Switch>
-        <Route exact path="/" render={props => <Homepage {...props} />} />
+        <Route
+          exact
+          path="/"
+          render={props => <Homepage currentUser={currentUser} {...props} />}
+        />
         <Route
           exact
           path="/signin"
@@ -52,7 +56,7 @@ const Main = props => {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUSer,
+    currentUser: state.currentUser,
     errors: state.errors
   };
 }
