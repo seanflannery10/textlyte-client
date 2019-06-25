@@ -18,7 +18,7 @@ class MessageList extends Component {
         profileImageUrl={msg.user.profileImageUrl}
       />
     ));
-    return MessageList;
+    return messageList;
   }
 }
 
