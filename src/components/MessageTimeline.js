@@ -12,4 +12,3 @@ const MessageTimeline = ({ profileImageUrl, username }) => {
 };
 
 export default MessageTimeline;
-

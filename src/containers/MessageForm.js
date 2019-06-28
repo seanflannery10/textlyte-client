@@ -29,8 +29,8 @@ class MessageForm extends Component {
           value={this.state.message}
           onChange={event => this.setState({ message: event.target.value })}
         />
-        <button type="submit" className="btn btn-success pull-right">
-          Add Message
+        <button type="submit" className="btn btn-success">
+          Add message!
         </button>
       </form>
     );
