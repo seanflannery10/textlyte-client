@@ -28,7 +28,9 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li>
-                <a onClick={this.logout}>Log out</a>
+                <Link to="/" onClick={this.logout}>
+                  Log out
+                </Link>
               </li>
             </ul>
           ) : (
